@@ -1,0 +1,109 @@
+\documentclass[]{article}
+%\usepackage{url}
+%\usepackage{algorithmic}
+\usepackage[a4paper]{geometry}
+\usepackage{datetime}
+\usepackage[margin=2em, font=small,labelfont=it]{caption}
+\usepackage{graphicx}
+\usepackage{mathpazo} % use palatino
+\usepackage[scaled]{helvet} % helvetica
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{subfigure}
+% Letterspacing macros
+\newcommand{\spacecaps}[1]{\textls[200]{\MakeUppercase{#1}}}
+\newcommand{\spacesc}[1]{\textls[50]{\textsc{\MakeLowercase{#1}}}}
+
+\title{\spacecaps{Assignment Report 1: Process and Thread Implementation}\\ \normalsize \spacesc{CENG2034, Operating Systems} }
+
+\author{Furkan Baldır\\furkanbaldir13@gmail.com}
+%\date{\today\\\currenttime}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+	Today, this is the world of computers. Almost everything connected with computers. That's why humanity needs people who can speak the language of computers. These people are programmers.  However, if a programmers want to be a good programmer, they need to understand how operating system works. They need to understand processed of the operating system in the background. Understanding the processes is important to understand the computer.
+\end{abstract}
+
+
+\section{Introduction}
+In this homework, our goal is learning processes of computers, how threads works, and how we can implement these thing with python. In my opinion, this lab has a specific purpose: learning to be a good programmer. Because operating systems are bridge between user and hardware and we need to use this bridge efficiently to make good programs.
+
+\section{Assignments}
+This section should describe what work was done and how, specifically how you solved the different tasks. For this type of lab report it can be beneficial to put each assignment in its own subsection.
+
+\subsection{What I used in project}
+
+\subsubsection*{CPU Features}
+Model Name: AMD A8-7410 APU with AMD Radeon R5 Graphics\newline
+Core Count: 4\newline
+Thread Count: 4
+\subsubsection*{Operating System}
+Linux Mint 19.3 Tricia
+\subsubsection*{Kernel Version}
+Linux 5.3.0-46-generic x86 64
+\subsubsection*{Programming Language}
+Python 3.6 (Imported modules: os, sys, requests, threading, time)
+
+\subsection{Problems}
+\subsubsection{Reach and Print PID}
+To reach PID of my program, I used \boldsymbol{"os"} module. Function is: \boldsymbol{"os.getpid()"}
+\subsubsection{Reach and Print "loadavg" Values}
+To reach loadavg values of my program, I used \boldsymbol{"os"} module. Function is: \boldsymbol{"os.getloadavg()"}
+\subsubsection{Control CPU Usage and Exit the Application for 5 min Loadavg Value}
+I used \boldsymbol os and \boldsymbol sys module. Loadavg: (0.52, \boldsymbol{0.78}, 0.93). We need pick the second value. I created a variable; \boldsymbol{loadavg = os.getloadavg()} then I convert loadavg to \boldsymbol{string} to use as \boldsymbol{array}. loadavg[1] is 5 min value.\newline
+Then, \boldsymbol{cpucount = os.cpu_count()}. \boldsymbol{If\space cpucount - loadavg[1] < 1: sys.exit}
+\subsubsection{Check Links are Valid or not Valid with Using Threads}
+I used \boldsymbol os , \boldsymbol requests \boldsymbol threading modules.
+We have an array that it has: \newline\newline
+https://api.github.com/\newline
+http://bilgisayar.mu.edu.tr/\newline
+https://www.python.org/\newline
+http://akrepnalan.com/ceng2034\newline
+https://github.com/caesarsalad/wow\newline\newline
+To test I created a \boldsymbol get\_status() function that it checks status code of website with using \boldsymbol requests module\newline\newline
+Then I created 5 thread functions for each website with using threading module.\newline
+\newline \boldsymbol{thread1 = threading.Thread(target=get\_status, args=(hostnames[0],))}\newline
+\boldsymbol{thread1.start()}\newline
+\boldsymbol{thread1.join()}
+
+\subsubsection{Checking Time Values}
+I used \boldsymbol time module to check finishing times. \boldsymbol time.time() function used for this.
+
+
+\section{Results}
+\subsection{About PID}
+
+\includegraphics[scale=0.60]{pid1.png}
+\includegraphics[scale=0.60]{pid2.png}
+\newline\newline
+When I re-launch my application, PID of the program changes. So it always creates new process if we launch same program repeatedly.
+
+\subsection{About loadavg}
+Loadavg: (1.88, 2.17, 2.21)
+\newline
+The three columns measure CPU and IO utilization of the last \boldsymbol one, \boldsymbol five, and \boldsymbol 15 \boldsymbol minute periods. 
+
+\subsection{Time Saving with Threads}
+In the right conditions, threads save a lot of time! I tested same function with threads and without threads. Results are unbelievable. 
+\newline\newline
+\includegraphics[scale=0.34]{withoutThread.png}
+\includegraphics[scale=0.35]{thread.png}
+\newline
+Without thread: \boldsymbol 0.84 second,    With 5 thread: \boldsymbol 0.22 second spent.
+
+\subsubsection*{Note}
+My CPU has 4 threads but I use 5 different threads in python. So practically, if we use threads more than max threads of cpu, there is no error.
+\section{Conclusion}
+To conclude this project, on GNU / Linux, every application create new processes as file ("Everything is a file"). When re-launch the application, again operating system creates new process. That's why programmer should use these processes with more efficient ways. In this time threads are running to help. It will be more effective to run at the same time if the events are independent from each other. Today, we are in computer age. That's why we need to understand how operating system works because computer world continues to grow rapidly. 
+
+
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
+
+
